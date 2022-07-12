@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.ejs": "html",
+    "ostream": "cpp"
+  },
+  "java.project.sourcePaths": [
+    "leetcode_java/01_two_sum/src",
+    "leetcode_java/83. Remove Duplicates from Sorted List/src"
+  ],
+  "C_Cpp.errorSquiggles": "Enabled",
+  "editor.defaultFormatter": "redhat.java"
+}
