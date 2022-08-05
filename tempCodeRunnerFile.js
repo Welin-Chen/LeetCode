@@ -1,1 +1,4 @@
-minAddToMakeValid
+grid = [
+//   [")", ")"],
+//   ["(", "("],
+// ];
