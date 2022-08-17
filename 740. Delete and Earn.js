@@ -3,17 +3,19 @@
  * @return {number}
  */
 var deleteAndEarn = function (nums) {
-  let n = Math.max(...nums);
-  let cnts = new Array(n + 1).fill(0);
-  for (let c of nums) cnts[c]++;
+  let max = Math.max(...nums);
+  let dp = Array(max + 1).fill(0);
+  let cnts = Array(max + 1).fill(0);
 
-  let dp = new Array(n + 1).fill(0);
+  for (let num of nums) cnts[num]++;
+
   dp[1] = cnts[1];
-  for (let i = 2; i <= n; i++) {
+
+  for (let i = 2; i <= max; i++) {
     let points = i * cnts[i];
-    dp[i] = Math.max(dp[i - 2] + points, dp[i - 1]);
+    dp[i] = Math.max(dp[i - 1], dp[i - 2] + points);
   }
-  return dp[n];
+  return dp[max];
 };
 
 let nums = [3, 4, 2];
