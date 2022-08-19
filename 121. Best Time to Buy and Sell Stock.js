@@ -1,18 +1,16 @@
-/**
- * @param {number[]} prices
- * @return {number}
- */
 var maxProfit = function (prices) {
-  let max = -Infinity,
-    min = Infinity;
-  for (let i = 0; i < prices.length; i++) {
-    min = Math.min(min, prices[i]);
-    max = Math.max(max, prices[i] - min);
+  let profit = 0;
+  let max = 0;
+
+  for (let i = 0, j = 1; j < prices.length; j++) {
+    profit = prices[j] - prices[i];
+    max = Math.max(max, profit);
+    if (prices[j] < prices[i]) i = j;
   }
   return max;
 };
 
-// let prices = [7, 1, 5, 3, 6, 4];
-let prices = [7, 6, 4, 3, 1];
+let prices = [7, 1, 5, 3, 6, 4];
+output: 5;
 
 console.log(maxProfit(prices));
