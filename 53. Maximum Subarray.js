@@ -1,26 +1,12 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-// var maxSubArray = function (nums) {
-//   let n = nums.length;
-//   let sum = 0;
-//   let max = -Infinity;
-
-//   for (let i = 0; i < n; i++) {
-//     sum = Math.max(sum + nums[i], nums[i]);
-//     max = Math.max(max, sum);
-//   }
-//   return max;
-// };
-
 var maxSubArray = function (nums) {
-  let n = nums.length;
+  let max = -Infinity;
+  let res = -Infinity;
 
-  for (let i = 1; i < n; i++) {
-    nums[i] = Math.max(nums[i] + nums[i - 1], nums[i]);
+  for (let i = 0; i < nums.length; i++) {
+    max = Math.max(max + nums[i], nums[i]);
+    res = Math.max(res, max);
   }
-  return Math.max(...nums);
+  return res;
 };
 
 let nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
