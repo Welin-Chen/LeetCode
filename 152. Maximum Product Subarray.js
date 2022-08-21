@@ -1,12 +1,11 @@
 var maxProduct = function (nums) {
-  let [max, min] = [1, 1];
+  let max = 1;
+  let min = 1;
   let res = -Infinity;
 
-  for (let n of nums) {
-    let maxP = n * max;
-    let minP = n * min;
-    max = Math.max(n, maxP, minP);
-    min = Math.min(n, maxP, minP);
+  for (let i = 0; i < nums.length; i++) {
+    let n = nums[i];
+    [max, min] = [Math.max(n, n * max, n * min), Math.min(n, n * max, n * min)];
     res = Math.max(res, max);
   }
   return res;
