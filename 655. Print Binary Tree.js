@@ -9,12 +9,24 @@ class TreeNode {
 var printTree = function (root) {
   let rows = getH(root);
   let cols = 2 ** rows - 1;
-  let res = [];
 
+  // let res = [...Array(rows)].map((e) => Array(cols).fill(""));
+  let res = [];
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < cols; j++) row.push("");
     res.push(row);
+  }
+
+  function dfs(root, d, l, r, res) {
+    if (!root || l > r) return res;
+
+    let mid = (l + r) / 2;
+    res[d][mid] = root.val + "";
+
+    dfs(root.left, d + 1, l, mid - 1, res);
+    dfs(root.right, d + 1, mid + 1, r, res);
+    return res;
   }
 
   function getH(root) {
@@ -22,18 +34,7 @@ var printTree = function (root) {
     return 1 + Math.max(getH(root.left), getH(root.right));
   }
 
-  function dfs(root, d, l, r, res) {
-    if (!root || l > r) return;
-
-    let mid = (l + r) / 2;
-    res[d][mid] = root.val + "";
-
-    dfs(root.left, d + 1, l, mid - 1, res);
-    dfs(root.right, d + 1, mid + 1, r, res);
-  }
-
-  dfs(root, 0, 0, cols - 1, res);
-  return res;
+  return dfs(root, 0, 0, cols - 1, res);
 };
 
 let root = [1, 2];
