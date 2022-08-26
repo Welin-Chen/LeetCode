@@ -28,24 +28,21 @@ class Node {
 
 var construct = function (grid) {
   let n = grid.length;
-  return recurse([0, n, 0, n]);
+  return dfs([0, n, 0, n]);
 
-  function recurse(matrix) {
+  function dfs(matrix) {
     let [r0, rn, c0, cn] = matrix;
     if (rn - r0 === 1) return new Node(grid[r0][c0], true);
 
     let { tl, tr, bl, br } = split(matrix);
-    let nTL = recurse(tl);
-    let nTR = recurse(tr);
-    let nBL = recurse(bl);
-    let nBR = recurse(br);
+    let [TL, TR, BL, BR] = [dfs(tl), dfs(tr), dfs(bl), dfs(br)];
 
-    if (nTL.isLeaf && nTR.isLeaf && nBL.isLeaf && nBR.isLeaf) {
-      if (nTL.val === nTR.val && nTR.val === nBL.val && nBL.val === nBR.val) {
-        return new Node(nTL.val, true);
+    if (TL.isLeaf && TR.isLeaf && BL.isLeaf && BR.isLeaf) {
+      if (TL.val === TR.val && TR.val === BL.val && BL.val === BR.val) {
+        return new Node(TL.val, true);
       }
     }
-    return new Node(false, false, nTL, nTR, nBL, nBR);
+    return new Node(false, false, TL, TR, BL, BR);
   }
 
   function split(matrix) {
@@ -57,6 +54,7 @@ var construct = function (grid) {
     let tr = [r0, midR, midC, cn];
     let bl = [midR, rn, c0, midC];
     let br = [midR, rn, midC, cn];
+
     return { tl, tr, bl, br };
   }
 };
