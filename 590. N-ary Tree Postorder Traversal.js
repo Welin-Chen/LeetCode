@@ -1,6 +1,6 @@
 /**
  * // Definition for a Node.
- * function Node(val, children) {
+ * function Node(val,children) {
  *    this.val = val;
  *    this.children = children;
  * };
@@ -19,24 +19,25 @@ class Node {
 }
 
 // 1.recurse
-// function preorder(root) {
+// var postorder = function (root) {
 //   let res = [];
 //   return dfs(root);
 
 //   function dfs(root) {
 //     if (!root) return res;
-//     res.push(root.val);
+
 //     if (root.children) {
 //       for (let i = 0; i < root.children.length; i++) {
 //         dfs(root.children[i]);
 //       }
 //     }
+//     res.push(root.val);
 //     return res;
 //   }
-// }
+// };
 
 // 2.stack
-function preorder(root) {
+var postorder = function (root) {
   if (!root) return [];
   let res = [];
   let stack = [];
@@ -46,20 +47,19 @@ function preorder(root) {
     let n = stack.pop();
     res.push(n.val);
     if (n.children) {
-      for (let i = n.children.length - 1; i >= 0; i--) {
+      for (let i = 0; i < n.children.length; i++) {
         stack.push(n.children[i]);
       }
     }
   }
-  return res;
-}
+  return res.reverse();
+};
 
 let root = [1, null, 3, 2, 4, null, 5, 6];
-// [1,3,5,6,2,4]
-
+Output: [5, 6, 3, 2, 4, 1];
 root = new Node(1);
-root.children = [3, 2, 4].map((v) => new Node(v));
-root.children[0].children = [5, 6].map((v) => new Node(v));
-// console.log(root);
+root.children = [3, 2, 4].map((el) => new Node(el));
+root.children[0].children = [5, 6].map((el) => new Node(el));
+console.log(root);
 
-console.log(preorder(root));
+console.log(postorder(root));
