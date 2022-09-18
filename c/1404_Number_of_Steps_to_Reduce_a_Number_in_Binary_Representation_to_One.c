@@ -29,7 +29,7 @@ int numSteps(char *s) {
     }
     step++;  // divide 2
   }
-  if (s[0] == '1' && carry == 1) {
+  if (s[0] == "1" && carry == 1) {
     step++;  // divide 2
   }
   return step;
