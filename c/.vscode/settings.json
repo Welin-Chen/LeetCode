@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "stdio.h": "c",
-        "ostream": "cpp"
+        "stdio.h": "c"
     }
 }
